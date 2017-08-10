@@ -4,8 +4,8 @@ class NavUserInterface extends Component {
   render () {
     return (
       <ul className="nav navbar-nav navbar-right">
-        <li>Profile</li>
-        <li>Search</li>
+        <li><a>Profile</a></li>
+        <li><a>Get Out</a></li>
       </ul>
     )
   }
