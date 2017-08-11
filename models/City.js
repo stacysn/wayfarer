@@ -9,4 +9,4 @@ let CitySchema = new Schema({
   posts: [Post.schema]
 })
 
-module.exports = mongoose.model('CitySchema', CitySchema);
+module.exports = mongoose.model('City', CitySchema);
