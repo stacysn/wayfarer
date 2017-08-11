@@ -6,22 +6,22 @@ var CityData =[];
   CityData.push({
       city: 'San Francisco',
       country: 'United States',
-      image: 'public/images/SFSunrise.jpg',
+      image: 'images/SFSunrise.jpg',
   });
   CityData.push({
       city: 'Seattle',
       country: 'United States',
-      image: 'public/images/SeattleSunset.jpg',
+      image: 'images/SeattleSunset.jpg',
   });
   CityData.push({
       city: 'London',
       country: 'Great Britain',
-      image: 'public/images/LondonDay.jpg',
+      image: 'images/LondonDay.jpg',
   });
   CityData.push({
       city: 'Sydney',
       country: 'Australia',
-      image: 'public/images/sydney_opera_house_australia_2-wallpaper-1920x1080.jpg',
+      image: 'images/sydney_opera_house_australia_2-wallpaper-1920x1080.jpg',
   });
 
 
