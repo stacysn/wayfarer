@@ -4,10 +4,22 @@ mongoose.connect('mongodb://localhost/wayfarer');
 
 var CityData =[];
   CityData.push({
-      city: 'San Francisco',
-      country: 'United States',
-      image: 'images/SFSunrise.jpg',
-      description: 'San Francisco is the cultural, commercial, and financial center of Northern California. The consolidated city-county covers an area of about 47.9 square miles (124 km2) at the north end of the San Francisco Peninsula in the San Francisco Bay Area. It is the fourth-most populous city in California, and the 13th-most populous in the United States, with a 2016 census-estimated population of 870,887.'
+    city: 'San Francisco',
+    country: 'United States',
+    image: 'images/SFSunrise.jpg',
+    description: 'San Francisco is the cultural, commercial, and financial center of Northern California. The consolidated city-county covers an area of about 47.9 square miles (124 km2) at the north end of the San Francisco Peninsula in the San Francisco Bay Area. It is the fourth-most populous city in California, and the 13th-most populous in the United States, with a 2016 census-estimated population of 870,887.',
+    posts: [
+      {
+        user: "Chris",
+        text: "What a town!",
+        date: new Date()
+      },
+      {
+        user: "Chris",
+        text: "Amazing ice cream",
+        date: new Date()
+      }
+    ]
   });
   CityData.push({
       city: 'Seattle',
