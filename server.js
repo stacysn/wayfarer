@@ -77,6 +77,21 @@ router.route('/cities/:id')
       res.json({message: 'City Deleted!'})
     })
   })
+  .put(function (req, res) {  // UPDATE a city
+    db.City.findById(req.params.id, function (err, city) {
+      if (err) return res.json(err);
+      console.log('body', req.body);
+      console.log('trying to update', city);
+      for (let i in req.body) {
+        console.log('updating ' + i + ' to ' + req.body[i]);
+        city[i] = req.body[i];
+      }
+      city.save(function (err, city) {
+        if (err) return res.json(err);
+        res.json(city);
+      })
+    })
+  })
 
 router.route('/cities/:cityId/posts')
   .get(function(req, res){  // GET all posts
