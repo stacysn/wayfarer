@@ -80,10 +80,7 @@ router.route('/cities/:id')
   .put(function (req, res) {  // UPDATE a city
     db.City.findById(req.params.id, function (err, city) {
       if (err) return res.json(err);
-      console.log('body', req.body);
-      console.log('trying to update', city);
       for (let i in req.body) {
-        console.log('updating ' + i + ' to ' + req.body[i]);
         city[i] = req.body[i];
       }
       city.save(function (err, city) {
@@ -140,6 +137,19 @@ router.route('/cities/:cityId/posts/:postId')
     db.City.findById(req.params.cityId, function (err, city) {
       if (err) return res.json(err);
       res.json(city.posts.id(req.params.postId));
+    });
+  })
+  .put(function (req, res) {  // PUT one post
+    db.City.findById(req.params.cityId, function (err, city) {
+      if (err) return res.json(err);
+      const post = city.posts.id(req.params.postId);
+      for (let i in req.body) {
+        post[i] = req.body[i];
+      }
+      post.save(function(err, city) {
+        if (err) return res.json(err);
+        res.json(post);
+      });
     });
   })
 
