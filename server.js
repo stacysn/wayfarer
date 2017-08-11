@@ -130,6 +130,42 @@ router.get('/', function(req,res) {
       });
     })
 
+//route to delete specific post by id
+    router.route('/cities/:cityId/posts/:postId')
+      .delete(function(req, res){
+        db.City.findById(req.params.cityId, function(err, city){
+          let correctPost = city.posts.id(req.params.postId)
+            console.log("req.params.postId", req.params.postId);
+          if(correctPost){
+            correctPost.remove();
+            city.save(function(err, saved){
+              console.log("Removed ", correctPost);
+              res.status(200).send();
+            })
+          }
+          else{
+            return res.status(404).send("OH NO!!");
+          }
+        })
+      })
+      .get(function (req, res) { // get one post
+        console.log("GET one post")
+        db.City.findById(req.params.cityId, function (err, city) {
+          if (err) return res.json(err);
+          res.json(city.posts.id(req.params.postId));
+        });
+      })
+
+    router.route('/cities/:cityId')
+      .delete(function(req, res){
+        db.City.findOneAndRemove({_id: req.params.cityId}, function(err){
+          if (err){
+            res.status(500);
+          }
+          res.json({message: 'City Deleted!'})
+        })
+      })
+
 //start server
   app.listen(port, function(){
     console.log("API IS RUNNING ON PORT " + port);
