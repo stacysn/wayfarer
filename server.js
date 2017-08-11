@@ -12,7 +12,7 @@ var app = express(),
 var port = process.env.API_PORT || 3001;
 
 //db config
-mongoose.connect('mongodb://localhost/mern-comment-box');
+mongoose.connect('mongodb://localhost/wayfarer');
 
 //config API to use bodyParser and look for JSON in req.body
 app.use(bodyParser.urlencoded({extended: true }));
@@ -132,5 +132,5 @@ router.get('/', function(req,res) {
 
 //start server
   app.listen(port, function(){
-    console.log("API IS RUNNING!");
+    console.log("API IS RUNNING ON PORT " + port);
   })

@@ -1,4 +1,6 @@
 var db = require("./models");
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/wayfarer');
 
 var CityData =[];
   CityData.push({
@@ -23,13 +25,11 @@ var CityData =[];
   });
 
 
-db.cities.remove({}, function(err, cities){
+db.City.remove({}, function(err){
     // code in here runs after all delays are removed
-  db.cities.create(CityData, function(err, cities){
-    console.log('created city');
+  db.City.create(CityData, function(err, cities){
     // code in here runs after all delays are created
     if (err) { return console.log('ERROR', err); }
-      console.log("all cities:", cities);
+    console.log("all cities:", cities.length);
   });
-  console.log("created", CityData.length, "cities");
 });
