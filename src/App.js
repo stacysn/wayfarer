@@ -18,14 +18,20 @@ class App extends Component {
     $.ajax({
       method: 'GET',
       url: endpoint,
-      success: (cities) => this.setState({cities: cities})
+      success: this.updateCities.bind(this)
     })
+  }
+  updateCities(cities) {
+    this.setState({
+      cities: cities,
+      selectedCity: cities.length > 0 ? cities[0] : null
+    });
   }
   render() {
     return (
       <div className="App">
         <NavContainer isLoggedIn={this.state.isLoggedIn} />
-        <CitiesContainer cities={this.state.cities} apiUrl={this.props.apiUrl} />
+        <CitiesContainer cities={this.state.cities} selectedCity={this.state.selectedCity} updateCities={this.updateCities.bind(this)} apiUrl={this.props.apiUrl} />
       </div>
     );
   }
