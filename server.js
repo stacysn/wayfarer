@@ -104,6 +104,14 @@ router.get('/', function(req,res) {
           res.json(city);
       })
     })
+    .delete(function(req, res){
+      db.City.findOneAndRemove({_id: req.params.cityId}, function(err){
+        if (err){
+          res.status(500);
+        }
+        res.json({message: 'City Deleted!'})
+      })
+    })
 
   router.route('/cities/:cityId/posts')
     .get(function(req, res){
@@ -112,7 +120,6 @@ router.get('/', function(req,res) {
         res.json(city.posts);
       });
     })
-
     .post(function(req, res){
       db.City.findById(req.params.cityId, function(err, city){
         const doc = {
@@ -156,17 +163,7 @@ router.get('/', function(req,res) {
         });
       })
 
-    router.route('/cities/:cityId')
-      .delete(function(req, res){
-        db.City.findOneAndRemove({_id: req.params.cityId}, function(err){
-          if (err){
-            res.status(500);
-          }
-          res.json({message: 'City Deleted!'})
-        })
-      })
-
 //start server
-  app.listen(port, function(){
-    console.log("API IS RUNNING ON PORT " + port);
-  })
+app.listen(port, function() {
+  console.log("API IS RUNNING ON PORT " + port);
+})
