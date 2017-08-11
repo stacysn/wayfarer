@@ -17,7 +17,6 @@ mongoose.connect('mongodb://localhost/wayfarer');
 //config API to use bodyParser and look for JSON in req.body
 app.use(bodyParser.urlencoded({extended: true }));
 app.use(bodyParser.json());
-app.use('/api', router);
 
 //Prevent CORS errors
 app.use(function(req, res, next) {
@@ -30,6 +29,8 @@ app.use(function(req, res, next) {
   res.setHeader('Cache-Control', 'no-cache');
   next();
 });
+
+app.use('/api', router);
 
 //set route path and init API
 router.get('/', function(req,res) {
