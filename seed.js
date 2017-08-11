@@ -22,22 +22,73 @@ var CityData =[];
     ]
   });
   CityData.push({
-      city: 'Seattle',
-      country: 'United States',
-      image: 'images/SeattleSunset.jpg',
-      description: 'Seattle is a seaport city on the west coast of the United States and the seat of King County, Washington. With an estimated 704,352 residents as of 2016, Seattle is the largest city in both the state of Washington and the Pacific Northwest region of North America. In July 2013, it was the fastest-growing major city in the United States and remained in the Top 5 in May 2015 with an annual growth rate of 2.1%. In July 2016, Seattle was again the fastest-growing major U.S. city, with a 3.1% annual growth rate. The city is situated on an isthmus between Puget Sound (an inlet of the Pacific Ocean) and Lake Washington, about 100 miles (160 km) south of the Canada–United States border. A major gateway for trade with Asia, Seattle is the fourth-largest port in North America in terms of container handling as of 2015.'
+    city: 'Seattle',
+    country: 'United States',
+    image: 'images/SeattleSunset.jpg',
+    description: 'Seattle is a seaport city on the west coast of the United States and the seat of King County, Washington. With an estimated 704,352 residents as of 2016, Seattle is the largest city in both the state of Washington and the Pacific Northwest region of North America. In July 2013, it was the fastest-growing major city in the United States and remained in the Top 5 in May 2015 with an annual growth rate of 2.1%. In July 2016, Seattle was again the fastest-growing major U.S. city, with a 3.1% annual growth rate. The city is situated on an isthmus between Puget Sound (an inlet of the Pacific Ocean) and Lake Washington, about 100 miles (160 km) south of the Canada–United States border. A major gateway for trade with Asia, Seattle is the fourth-largest port in North America in terms of container handling as of 2015.',
+    posts: [
+      {
+        user: "Chris",
+        text: "What a town!",
+        date: new Date()
+      },
+      {
+        user: "Chris",
+        text: "Weather is blah.",
+        date: new Date()
+      },
+      {
+        user: "Chris",
+        text: "Great music!",
+        date: new Date()
+      }
+    ]
   });
   CityData.push({
-      city: 'London',
-      country: 'Great Britain',
-      image: 'images/LondonDay.jpg',
-      description: 'London is the capital and most populous city of England and the United Kingdom. Standing on the River Thames in the south east of the island of Great Britain, London has been a major settlement for two millennia. It was founded by the Romans, who named it Londinium. London\'s ancient core, the City of London, largely retains its 1.12-square-mile (2.9 km2) medieval boundaries. Since at least the 19th century, "London" has also referred to the metropolis around this core, historically split between Middlesex, Essex, Surrey, Kent, and Hertfordshire, which today largely makes up Greater London, a region governed by the Mayor of London and the London Assembly.'
+    city: 'London',
+    country: 'Great Britain',
+    image: 'images/LondonDay.jpg',
+    description: 'London is the capital and most populous city of England and the United Kingdom. Standing on the River Thames in the south east of the island of Great Britain, London has been a major settlement for two millennia. It was founded by the Romans, who named it Londinium. London\'s ancient core, the City of London, largely retains its 1.12-square-mile (2.9 km2) medieval boundaries. Since at least the 19th century, "London" has also referred to the metropolis around this core, historically split between Middlesex, Essex, Surrey, Kent, and Hertfordshire, which today largely makes up Greater London, a region governed by the Mayor of London and the London Assembly.',
+    posts: [
+      {
+        user: "Chris",
+        text: "What a town!",
+        date: new Date()
+      },
+      {
+        user: "Chris",
+        text: "Beautiful architecture!",
+        date: new Date()
+      },
+      {
+        user: "Chris",
+        text: "Blah weather and food.",
+        date: new Date()
+      }
+    ]
   });
   CityData.push({
       city: 'Sydney',
       country: 'Australia',
       image: 'images/sydney_opera_house_australia_2-wallpaper-1920x1080.jpg',
-      description: 'Sydney is the state capital of New South Wales and the most populous city in Australia and Oceania. Located on Australia\'s east coast, the metropolis surrounds the world\'s largest natural harbour and sprawls about 70 km (43.5 mi) on its periphery towards the Blue Mountains to the west, Hawkesbury to the north and Macarthur to the south. Sydney is made up of 658 suburbs, 40 local government areas and 15 contiguous regions. Residents of the city are known as "Sydneysiders". As at June 2016 Sydney\'s estimated population was 5,029,768.'
+      description: 'Sydney is the state capital of New South Wales and the most populous city in Australia and Oceania. Located on Australia\'s east coast, the metropolis surrounds the world\'s largest natural harbour and sprawls about 70 km (43.5 mi) on its periphery towards the Blue Mountains to the west, Hawkesbury to the north and Macarthur to the south. Sydney is made up of 658 suburbs, 40 local government areas and 15 contiguous regions. Residents of the city are known as "Sydneysiders". As at June 2016 Sydney\'s estimated population was 5,029,768.',
+    posts: [
+      {
+        user: "Chris",
+        text: "What a town!",
+        date: new Date()
+      },
+      {
+        user: "Chris",
+        text: "Beautiful nature!",
+        date: new Date()
+      },
+      {
+        user: "Chris",
+        text: "Dangerous wildlife.",
+        date: new Date()
+      }
+    ]
   });
 
 
