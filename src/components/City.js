@@ -11,7 +11,7 @@ class City extends Component {
     };
     const postComponents = city.posts.map(post => {
       return (
-        <a className="list-group-item">
+        <a className="list-group-item" key={post._id}>
           <h4 className="list-group-item-heading">{post.user}</h4>
           <p className="list-group-item-text">{post.text}</p>
         </a>
