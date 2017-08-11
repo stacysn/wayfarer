@@ -6,6 +6,7 @@ let CitySchema = new Schema({
   city: String,
   country: String,
   image: String,
+  description: String,
   posts: [Post.schema]
 })
 
