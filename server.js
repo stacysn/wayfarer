@@ -140,13 +140,20 @@ router.get('/', function(req,res) {
             correctPost.remove();
             city.save(function(err, saved){
               console.log("Removed ", correctPost);
-              res.json(city);
+              res.status(200).send();
             })
           }
           else{
-            return console.log("OH NO!!");;
+            return res.status(404).send("OH NO!!");
           }
         })
+      })
+      .get(function (req, res) { // get one post
+        console.log("GET one post")
+        db.City.findById(req.params.cityId, function (err, city) {
+          if (err) return res.json(err);
+          res.json(city.posts.id(req.params.postId));
+        });
       })
 
     router.route('/cities/:cityId')
