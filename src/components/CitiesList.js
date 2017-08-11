@@ -12,10 +12,9 @@ class CitiesList extends Component {
     this.setState({cities: this.props.cities});
   }
   render () {
-    console.log('value of this.props.cities in CitiesList.js', this.props.cities);
     const cityComponents = this.props.cities.map(city => {
       return (
-        <a className="list-group-item">
+        <a className="list-group-item" key={city._id} >
           {city.city}
         </a>
       );
