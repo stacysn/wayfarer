@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NavContainer from './components/NavContainer';
+import GuestContainer from './components/GuestContainer';
 import './App.css';
 import CitiesContainer from './components/CitiesContainer.js';
 import $ from 'jquery-ajax';
@@ -28,10 +29,14 @@ class App extends Component {
     });
   }
   render() {
+    const currentView = this.state.isLoggedIn
+      ? <CitiesContainer cities={this.state.cities} selectedCity={this.state.selectedCity} updateCities={this.updateCities.bind(this)} apiUrl={this.props.apiUrl} />
+      : <GuestContainer/>
+      
     return (
       <div className="App">
         <NavContainer isLoggedIn={this.state.isLoggedIn} />
-        <CitiesContainer cities={this.state.cities} selectedCity={this.state.selectedCity} updateCities={this.updateCities.bind(this)} apiUrl={this.props.apiUrl} />
+        {currentView}
       </div>
     );
   }
