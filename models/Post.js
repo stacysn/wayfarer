@@ -3,6 +3,7 @@ let Schema = mongoose.Schema;
 
 let PostSchema = new Schema({
   user: String,
+  title: String,
   text: String,
   date: Date
 })
