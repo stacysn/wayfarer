@@ -2,8 +2,8 @@ var db = require("./models");
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/wayfarer');
 
-var CityData =[];
-  CityData.push({
+const CityData = [
+  {
     city: 'San Francisco',
     country: 'United States',
     image: 'images/SFSunrise.jpg',
@@ -11,17 +11,19 @@ var CityData =[];
     posts: [
       {
         user: "Chris",
-        text: "What a town!",
+        title: "What a town!",
+        text: "I am really impressed!",
         date: new Date()
       },
       {
         user: "Chris",
-        text: "Amazing ice cream",
+        title: "Amazing ice cream",
+        text: "Try out Smittens.",
         date: new Date()
       }
     ]
-  });
-  CityData.push({
+  },
+  {
     city: 'Seattle',
     country: 'United States',
     image: 'images/SeattleSunset.jpg',
@@ -29,22 +31,25 @@ var CityData =[];
     posts: [
       {
         user: "Chris",
-        text: "What a town!",
+        title: "What a town!",
+        text: "Great music, dudes have long hair.",
         date: new Date()
       },
       {
         user: "Chris",
-        text: "Weather is blah.",
+        title: "Weather is blah.",
+        text: "I missed the sun.",
         date: new Date()
       },
       {
         user: "Chris",
-        text: "Great music!",
+        title: "Great music!",
+        text: "Amazing vinyl stores.",
         date: new Date()
       }
     ]
-  });
-  CityData.push({
+  },
+  {
     city: 'London',
     country: 'Great Britain',
     image: 'images/LondonDay.jpg',
@@ -52,50 +57,54 @@ var CityData =[];
     posts: [
       {
         user: "Chris",
-        text: "What a town!",
+        title: "What a town!",
+        text: "Very old.",
         date: new Date()
       },
       {
         user: "Chris",
-        text: "Beautiful architecture!",
+        title: "Beautiful architecture!",
+        text: "I heard about that London Eye.",
         date: new Date()
       },
       {
         user: "Chris",
-        text: "Blah weather and food.",
+        title: "Blah weather and food.",
+        text: "Meat pudding.",
         date: new Date()
       }
     ]
-  });
-  CityData.push({
-      city: 'Sydney',
-      country: 'Australia',
-      image: 'images/sydney_opera_house_australia_2-wallpaper-1920x1080.jpg',
-      description: 'Sydney is the state capital of New South Wales and the most populous city in Australia and Oceania. Located on Australia\'s east coast, the metropolis surrounds the world\'s largest natural harbour and sprawls about 70 km (43.5 mi) on its periphery towards the Blue Mountains to the west, Hawkesbury to the north and Macarthur to the south. Sydney is made up of 658 suburbs, 40 local government areas and 15 contiguous regions. Residents of the city are known as "Sydneysiders". As at June 2016 Sydney\'s estimated population was 5,029,768.',
+  },
+  {
+    city: 'Sydney',
+    country: 'Australia',
+    image: 'images/sydney_opera_house_australia_2-wallpaper-1920x1080.jpg',
+    description: 'Sydney is the state capital of New South Wales and the most populous city in Australia and Oceania. Located on Australia\'s east coast, the metropolis surrounds the world\'s largest natural harbour and sprawls about 70 km (43.5 mi) on its periphery towards the Blue Mountains to the west, Hawkesbury to the north and Macarthur to the south. Sydney is made up of 658 suburbs, 40 local government areas and 15 contiguous regions. Residents of the city are known as "Sydneysiders". As at June 2016 Sydney\'s estimated population was 5,029,768.',
     posts: [
       {
         user: "Chris",
-        text: "What a town!",
+        title: "What a town!",
+        text: "How about that opera house?",
         date: new Date()
       },
       {
         user: "Chris",
-        text: "Beautiful nature!",
+        title: "Beautiful nature!",
+        text: "Lots of wide open spaces. Eucalyptus trees.",
         date: new Date()
       },
       {
         user: "Chris",
-        text: "Dangerous wildlife.",
+        title: "Dangerous wildlife.",
+        text: "Everything wants to eat you.",
         date: new Date()
       }
     ]
-  });
-
+  }
+];
 
 db.City.remove({}, function(err){
-    // code in here runs after all delays are removed
   db.City.create(CityData, function(err, cities){
-    // code in here runs after all delays are created
     if (err) { return console.log('ERROR', err); }
     console.log("all cities:", cities.length);
   });
