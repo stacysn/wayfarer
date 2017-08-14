@@ -70,15 +70,27 @@ class App extends Component {
             <NavContainer isLoggedIn={this.state.isLoggedIn} />
           )} />
         <Route path="/guest" render={(props) => <GuestContainer />} />
-        <Route path="/cities/:cityId" render={(props) => (
-          <CitiesContainer
+        <Route path="/cities/:cityId" render={(props) => {
+          let city = this.state.cities.reduce((prev, curr) => {
+            // find the city in cities whose ._id matches cityId
+            return prev ? prev : ((curr._id === props.match.params.cityId) ? curr : null)
+          }, null);
+          city = city || { // to prevent code breakage, create dummy properties
+            city: 'default cityname',
+            country: 'default country',
+            image: '',
+            description: 'default city description',
+            posts: []
+          };
+          return (<CitiesContainer
             cities={this.state.cities}
+            matcha={props.match}
             selectCity={this.selectCity.bind(this)}
-            selectedCity={this.state.selectedCity}
+            selectedCity={city}
             addNewPost={this.addNewPost.bind(this)}
             apiUrl={this.props.apiUrl}
           />)}
-        />
+        }/>
         </div>
     </BrowserRouter>
     );
