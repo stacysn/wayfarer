@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import $ from 'jquery-ajax';
 
 class AddPostModal extends Component{
   constructor(props){
@@ -19,7 +18,7 @@ class AddPostModal extends Component{
         <div className="modal-content">
           <div className="modal-header">
             <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 className="modal-title">Write a post for {this.props.city?this.props.city.city:""}</h4>
+            <h4 className="modal-title">Write a post for {this.props.city.city}</h4>
           </div>
           <form onSubmit={e => {
             this.props.addNewPost(this.props.city._id, e);

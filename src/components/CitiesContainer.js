@@ -3,6 +3,10 @@ import CitiesList from './CitiesList.js';
 import City from './City.js';
 
 class CitiesContainer extends Component {
+  constructor (props) {
+    super(props);
+    console.log('cityId', props.matcha.params.cityId);
+  }
   render () {
     return (
       <div className="container">
