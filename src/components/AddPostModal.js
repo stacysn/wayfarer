@@ -6,16 +6,12 @@ class AddPostModal extends Component{
     super(props);
     this.state = {title: '', text:''};
   }
-
   handleTitleChange(e){
     this.setState({title: e.target.value});
   }
-
   handleTextChange(e){
     this.setState({text: e.target.value});
   }
-
-
   render(){
     return(
     <div className="modal fade" tabIndex="-1" role="dialog" id="add-post">
@@ -25,10 +21,13 @@ class AddPostModal extends Component{
             <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4 className="modal-title">Write a post for {this.props.city?this.props.city.city:""}</h4>
           </div>
-          <form onSubmit={e => this.props.addNewPost(this.props.city._id, e)}>
+          <form onSubmit={e => {
+            this.props.addNewPost(this.props.city._id, e);
+            $('#add-post').modal('hide');
+          }}>
             <div className="modal-body">
               <div className="form-group">
-                <label for="recipient-name" className="control-label">Title</label>
+                <label htmlFor="recipient-name" className="control-label">Title</label>
                 <input name="title" type="text"
                 className="form-control"
                 id="recipient-name"
