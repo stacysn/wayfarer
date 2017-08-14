@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
 import NavContainer from './components/NavContainer';
 import GuestContainer from './components/GuestContainer';
-import './App.css';
 import CitiesContainer from './components/CitiesContainer.js';
+import './App.css';
 import $ from 'jquery-ajax';
 
 class App extends Component {
@@ -25,7 +26,7 @@ class App extends Component {
       success: cities => {
         this.setState({
           cities: cities,
-          selectedCity: cities.length > 0 ? cities[0] : null
+          selectedCity: this.state.selectedCity || cities.length > 0 ? cities[0] : null
         });
       }
     });
