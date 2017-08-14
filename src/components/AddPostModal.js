@@ -23,7 +23,6 @@ class AddPostModal extends Component{
           </div>
           <form onSubmit={e => {
             this.props.addNewPost(this.props.city._id, e);
-            $('#add-post').modal('hide');
           }}>
             <div className="modal-body">
               <div className="form-group">
