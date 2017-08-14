@@ -12,10 +12,10 @@ class City extends Component {
     };
     const postComponents = city.posts.map(post => {
       return (
-        <a className="list-group-item" key={post._id}>
+        <button type="button" className="list-group-item" key={post._id}>
           <h4 className="list-group-item-heading">{post.user}</h4>
-          <p className="list-group-item-text">{post.text}</p>
-        </a>
+          <p className="list-group-item-text">{post.title}</p>
+        </button>
       )
     });
     return (
@@ -38,7 +38,12 @@ class City extends Component {
           </div>
           <div>
             <p>{city.description}</p>
-              <button type="button" className="btn btn-primary btn-lg" data-toggle="modal" data-target="#add-post">
+              <button
+                type="button"
+                className="btn btn-primary btn-lg"
+                data-toggle="modal"
+                data-target="#add-post"
+              >
                 New Post
               </button>
             <div className="list-group">
