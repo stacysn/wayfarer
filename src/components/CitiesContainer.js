@@ -8,7 +8,11 @@ class CitiesContainer extends Component {
       <div className="container">
         <h2>CitiesContainer</h2>
         <div className="row">
-          <CitiesList cities={this.props.cities} apiUrl={this.props.apiUrl} />
+          <CitiesList
+            selectCity={this.props.selectCity}
+            cities={this.props.cities}
+            apiUrl={this.props.apiUrl}
+          />
           <City addNewPost={this.props.addNewPost} city={this.props.selectedCity} />
         </div>
       </div>

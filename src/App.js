@@ -30,6 +30,12 @@ class App extends Component {
       }
     });
   }
+  selectCity(cityId) {
+    const selectedCity = this.state.cities.reduce((prev, curr) => {
+      return prev || ((curr._id === cityId) ? curr : null); // find matching city
+    }, null) || (this.state.cities.length > 0 ? this.state.cities[0] : null);
+    this.setState({selectedCity: selectedCity});
+  }
   addNewPost(cityId, e) {
     e.preventDefault();
     let newPost = {
@@ -47,7 +53,7 @@ class App extends Component {
   }
   render() {
     const currentView = this.state.isLoggedIn
-      ? <CitiesContainer cities={this.state.cities} selectedCity={this.state.selectedCity} addNewPost={this.addNewPost.bind(this)} apiUrl={this.props.apiUrl} />
+      ? <CitiesContainer cities={this.state.cities} selectCity={this.selectCity.bind(this)} selectedCity={this.state.selectedCity} addNewPost={this.addNewPost.bind(this)} apiUrl={this.props.apiUrl} />
       : <GuestContainer/>
       
     return (

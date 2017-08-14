@@ -4,9 +4,12 @@ class CitiesList extends Component {
   render () {
     const cityComponents = this.props.cities.map(city => {
       return (
-        <a className="list-group-item" key={city._id} >
+        <button 
+          className="list-group-item"
+          key={city._id}
+          onClick={e => this.props.selectCity(city._id)} >
           {city.city}
-        </a>
+        </button>
       );
     });
     return (
