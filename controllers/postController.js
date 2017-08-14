@@ -11,11 +11,11 @@ function newPost(req, res){ //POST a new post
   db.City.findById(req.params.cityId, function(err, city){
     const doc = {
       user: req.body.user,
+      title: req.body.title,
       text: req.body.text,
       date: new Date()
     };
     var newPost = new db.Post(doc);
-    console.log("NEW POST", newPost);
     city.posts.unshift(newPost);
     city.save(function(err, savedCity){
       if (err) res.json(err);

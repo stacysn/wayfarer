@@ -51,7 +51,7 @@ class City extends Component {
             </div>
           </div>
         </div>
-        <AddPostModal city={this.props.city} />
+        <AddPostModal addNewPost={this.props.addNewPost} city={this.props.city} />
       </div>
     )
   }
