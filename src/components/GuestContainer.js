@@ -3,9 +3,11 @@ import SlideShowInterface from './SlideShowInterface';
 import DiscoverInterface from './DiscoverInterface';
 
 class GuestContainer extends Component {
+  /*
   constructor (props) {
     super(props);
   }
+  */
   render () {
     return(
       <div>
