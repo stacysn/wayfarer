@@ -34,6 +34,7 @@ class App extends Component {
         if ((selectedCity.city === 'default cityname') && cities.length > 0) {
             // if we're at default & we read new cities...
           selectedCity = cities[0]; // ...then select 1st city we GET'd from db
+          // how to re-route from js?
         }
         this.setState({
           cities: cities,
@@ -42,11 +43,10 @@ class App extends Component {
       }
     });
   }
-  addNewPost(cityId, e) { // create a new post
-    e.preventDefault();
+  addNewPost(cityId, formData) { // create a new post
     let newPost = {
-      title: $(e.target.title).val(),
-      text: $(e.target.text).val(),
+      title: $(formData.title).val(),
+      text: $(formData.text).val(),
       user: this.state.user.name
     }
     $.ajax({

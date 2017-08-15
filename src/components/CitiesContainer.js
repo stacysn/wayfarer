@@ -5,9 +5,6 @@ import PostShow from './PostShow.js';
 import {Switch, Route} from 'react-router-dom';
 
 class CitiesContainer extends Component {
-  constructor (props) {
-    super(props);
-  }
   render () {
     return (
       <div className="container">
