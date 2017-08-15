@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
-import AddPostModal from './AddPostModal.js'
+import AddPostModal from './AddPostModal.js';
+import {Link} from 'react-router-dom';
 
 class City extends Component {
   render () {
     console.log(this.props.city);
     const postComponents = this.props.city.posts.map(post => (
-      <button type="button" className="list-group-item" key={post._id}>
+      <Link to={`/cities/${this.props.city._id}/posts/${post._id}`} className="list-group-item" key={post._id}>
         <h4 className="list-group-item-heading">{post.user}</h4>
         <p className="list-group-item-text">{post.title}</p>
-      </button>
+      </Link>
     ));
     return (
       <div>
