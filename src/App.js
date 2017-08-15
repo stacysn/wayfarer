@@ -57,7 +57,24 @@ class App extends Component {
       success: this.updateCities.bind(this)
     });
   }
+  getCity(cityId) {
+      let city = this.state.cities.reduce((prev, curr) => {
+        return prev || (curr._id === cityId ? curr : null);
+      }, null);
+      return city || {  // set default if city === null
+        city: 'default cityname',
+        country: 'default country',
+        image: '',
+        description: 'default city description',
+        posts: []
+      }
+    }
 
+    getPost(cityId, postId) {
+      return this.getCity(cityId).posts.reduce((prev, curr) => {
+        return prev || (curr._id === postId ? curr : null);
+      }, null);
+    }
 
   render() {
     return (
@@ -88,7 +105,7 @@ class App extends Component {
               return (<ProfileContainer
                 user={this.state.user}
                 />)
-              }}/>     
+              }}/>
 
           </Switch>
 
