@@ -93,7 +93,6 @@ class App extends Component {
               const dest = (this.state.isLoggedIn
                 ? `/cities/${this.state.selectedCity._id}`
                 : "/guest");
-              console.log(dest);
               return <Redirect to={dest} />;
             }} />
           </Switch>
