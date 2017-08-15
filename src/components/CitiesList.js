@@ -1,15 +1,17 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 
 class CitiesList extends Component {
   render () {
     const cityComponents = this.props.cities.map(city => {
       return (
-        <button 
+        <Link
+          to={`/cities/${city._id}`}
           className="list-group-item"
           key={city._id}
-          onClick={e => this.props.selectCity(city._id)} >
+        >
           {city.city}
-        </button>
+        </Link>
       );
     });
     return (
