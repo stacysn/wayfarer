@@ -3,7 +3,6 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import NavContainer from './components/NavContainer';
 import GuestContainer from './components/GuestContainer';
 import CitiesContainer from './components/CitiesContainer.js';
-import PostShow from './components/PostShow.js';
 import './App.css';
 import $ from 'jquery-ajax';
 
@@ -87,25 +86,19 @@ class App extends Component {
           <Route path="/" render={(props) => (
             <NavContainer isLoggedIn={this.state.isLoggedIn} />
           )} />
-        <Route path="/guest" render={(props) => <GuestContainer />} />
-        <Route path="/cities/:cityId" exact render={(props) => {  // must be exact!
-          const city = this.getCity(props.match.params.cityId);
-          return (<CitiesContainer
-            cities={this.state.cities}
-            matcha={props.match}
-            selectCity={this.selectCity.bind(this)}
-            selectedCity={city}
-            addNewPost={this.addNewPost.bind(this)}
-            apiUrl={this.props.apiUrl}
-          />)}
-        }/>
-        <Route path="/cities/:cityId/posts/:postId" render={(props) => {
-          const cityId = props.match.params.cityId,
-            postId = props.match.params.postId;
-          return (
-            <PostShow city={this.getCity(cityId)} post={this.getPost(cityId, postId)} />
-          )
-        }} />
+          <Route path="/guest" render={(props) => <GuestContainer />} />
+          <Route path="/cities/:cityId" render={(props) => {
+            return (<CitiesContainer
+              cities={this.state.cities}
+              getCity={this.getCity.bind(this)}
+              getPost={this.getPost.bind(this)}
+              matcha={props.match}
+              selectCity={this.selectCity.bind(this)}
+              selectedCity={this.getCity(props.match.params.cityId)}
+              addNewPost={this.addNewPost.bind(this)}
+              apiUrl={this.props.apiUrl}
+            />)}
+          }/>
         </div>
     </BrowserRouter>
     );
