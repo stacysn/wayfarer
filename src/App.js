@@ -3,6 +3,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import NavContainer from './components/NavContainer';
 import GuestContainer from './components/GuestContainer';
 import CitiesContainer from './components/CitiesContainer.js';
+import PostShow from './components/PostShow.js';
 import './App.css';
 import $ from 'jquery-ajax';
 
@@ -62,6 +63,23 @@ class App extends Component {
       success: this.updateCities.bind(this)
     });
   }
+  getCity(cityId) {
+    let city = this.state.cities.reduce((prev, curr) => {
+      return prev || (curr._id === cityId ? curr : null);
+    }, null);
+    return city || {  // set default if city === null
+      city: 'default cityname',
+      country: 'default country',
+      image: '',
+      description: 'default city description',
+      posts: []
+    }
+  }
+  getPost(cityId, postId) {
+    return this.getCity(cityId).posts.reduce((prev, curr) => {
+      return prev || (curr._id === postId ? curr : null);
+    }, null);
+  }
   render() {
     return (
       <BrowserRouter>
@@ -70,18 +88,8 @@ class App extends Component {
             <NavContainer isLoggedIn={this.state.isLoggedIn} />
           )} />
         <Route path="/guest" render={(props) => <GuestContainer />} />
-        <Route path="/cities/:cityId" render={(props) => {
-          let city = this.state.cities.reduce((prev, curr) => {
-            // find the city in cities whose ._id matches cityId
-            return prev ? prev : ((curr._id === props.match.params.cityId) ? curr : null)
-          }, null);
-          city = city || { // to prevent code breakage, create dummy properties
-            city: 'default cityname',
-            country: 'default country',
-            image: '',
-            description: 'default city description',
-            posts: []
-          };
+        <Route path="/cities/:cityId" exact render={(props) => {  // must be exact!
+          const city = this.getCity(props.match.params.cityId);
           return (<CitiesContainer
             cities={this.state.cities}
             matcha={props.match}
@@ -91,6 +99,13 @@ class App extends Component {
             apiUrl={this.props.apiUrl}
           />)}
         }/>
+        <Route path="/cities/:cityId/posts/:postId" render={(props) => {
+          const cityId = props.match.params.cityId,
+            postId = props.match.params.postId;
+          return (
+            <PostShow city={this.getCity(cityId)} post={this.getPost(cityId, postId)} />
+          )
+        }} />
         </div>
     </BrowserRouter>
     );
