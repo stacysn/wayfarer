@@ -5,19 +5,12 @@ import PostShow from './PostShow.js';
 import {Switch, Route} from 'react-router-dom';
 
 class CitiesContainer extends Component {
-  constructor (props) {
-    super(props);
-    console.log('cityId', props.matcha.params.cityId);
-  }
   render () {
     return (
       <div className="container">
-        <h2>CitiesContainer</h2>
         <div className="row">
           <CitiesList
-            selectCity={this.props.selectCity}
             cities={this.props.cities}
-            apiUrl={this.props.apiUrl}
           />
           <Switch>
             <Route path={`/cities/:cityId`} exact render={props => {

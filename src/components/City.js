@@ -3,6 +3,12 @@ import AddPostModal from './AddPostModal.js';
 import {Link} from 'react-router-dom';
 
 class City extends Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      modalIsOpen: false
+    };
+  }
   render () {
     console.log(this.props.city);
     const postComponents = this.props.city.posts.map(post => (
@@ -34,8 +40,7 @@ class City extends Component {
               <button
                 type="button"
                 className="btn btn-primary btn-lg"
-                data-toggle="modal"
-                data-target="#add-post"
+                onClick={e=>this.setState({modalIsOpen:true})}
               >
                 New Post
               </button>
@@ -44,7 +49,12 @@ class City extends Component {
             </div>
           </div>
         </div>
-        <AddPostModal addNewPost={this.props.addNewPost} city={this.props.city} />
+        <AddPostModal
+          isOpen={this.state.modalIsOpen}
+          addNewPost={this.props.addNewPost}
+          city={this.props.city}
+          closeModal={()=>this.setState({modalIsOpen:false})}
+        />
       </div>
     )
   }
