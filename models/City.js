@@ -6,7 +6,8 @@ let CitySchema = new Schema({
   city: String,
   country: String,
   image: String,
+  description: String,
   posts: [Post.schema]
 })
 
-module.exports = mongoose.model('CitySchema', CitySchema);
+module.exports = mongoose.model('City', CitySchema);
