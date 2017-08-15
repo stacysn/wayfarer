@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import NavContainer from './components/NavContainer';
 import GuestContainer from './components/GuestContainer';
 import CitiesContainer from './components/CitiesContainer.js';
+import ProfileContainer from './components/ProfileContainer.js';
 import './App.css';
 import $ from 'jquery-ajax';
 
@@ -11,7 +12,7 @@ class App extends Component {
     super(props);
     this.state = {
       isLoggedIn : true, // later should be false
-      user: {name: 'Chris'}, // dummy, replace later
+      user: {name: 'Chris', hometown: 'Aiea', image: '../images/chrisF.jpg'}, // dummy, replace later
       cities: [],
       selectedCity: { // to prevent code breakage, create dummy properties
         city: 'default cityname',
@@ -56,23 +57,8 @@ class App extends Component {
       success: this.updateCities.bind(this)
     });
   }
-  getCity(cityId) {
-    let city = this.state.cities.reduce((prev, curr) => {
-      return prev || (curr._id === cityId ? curr : null);
-    }, null);
-    return city || {  // set default if city === null
-      city: 'default cityname',
-      country: 'default country',
-      image: '',
-      description: 'default city description',
-      posts: []
-    }
-  }
-  getPost(cityId, postId) {
-    return this.getCity(cityId).posts.reduce((prev, curr) => {
-      return prev || (curr._id === postId ? curr : null);
-    }, null);
-  }
+
+
   render() {
     return (
       <BrowserRouter>
@@ -95,7 +81,17 @@ class App extends Component {
                 : "/guest");
               return <Redirect to={dest} />;
             }} />
+
+            <Route path="/guest" render={(props) => <GuestContainer />} />
+
+            <Route path="/profile" render={(props) => {
+              return (<ProfileContainer
+                user={this.state.user}
+                />)
+              }}/>     
+
           </Switch>
+
         </div>
       </BrowserRouter>
     );
