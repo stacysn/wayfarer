@@ -4,7 +4,6 @@ import NavGuestInterface from './NavGuestInterface';
 import NavUserInterface from './NavUserInterface';
 import {Link} from 'react-router-dom'
 
-
 class NavContainer extends Component {
   constructor (props) {
     super(props);
