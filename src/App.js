@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import NavContainer from './components/NavContainer';
 import GuestContainer from './components/GuestContainer';
 import CitiesContainer from './components/CitiesContainer.js';
@@ -42,12 +42,6 @@ class App extends Component {
       }
     });
   }
-  selectCity(cityId) {  // change which city is currently being viewed
-    const selectedCity = this.state.cities.reduce((prev, curr) => {
-      return prev || ((curr._id === cityId) ? curr : null); // find matching city
-    }, null) || (this.state.cities.length > 0 ? this.state.cities[0] : null);
-    this.setState({selectedCity: selectedCity});
-  }
   addNewPost(cityId, e) { // create a new post
     e.preventDefault();
     let newPost = {
@@ -83,24 +77,28 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="App">
-          <Route path="/" render={(props) => (
-            <NavContainer isLoggedIn={this.state.isLoggedIn} />
-          )} />
-          <Route path="/guest" render={(props) => <GuestContainer />} />
-          <Route path="/cities/:cityId" render={(props) => {
-            return (<CitiesContainer
-              cities={this.state.cities}
-              getCity={this.getCity.bind(this)}
-              getPost={this.getPost.bind(this)}
-              matcha={props.match}
-              selectCity={this.selectCity.bind(this)}
-              selectedCity={this.getCity(props.match.params.cityId)}
-              addNewPost={this.addNewPost.bind(this)}
-              apiUrl={this.props.apiUrl}
-            />)}
-          }/>
+          <NavContainer isLoggedIn={this.state.isLoggedIn} />
+          <Switch>
+            <Route path="/guest" render={(props) => <GuestContainer />} />
+            <Route path="/cities/:cityId" render={(props) => {
+              return (<CitiesContainer
+                cities={this.state.cities}
+                getCity={this.getCity.bind(this)}
+                getPost={this.getPost.bind(this)}
+                selectedCity={this.getCity(props.match.params.cityId)}
+                addNewPost={this.addNewPost.bind(this)}
+              />)}
+            }/>
+            <Route exact path="/" render={props => {
+              const dest = (this.state.isLoggedIn
+                ? `/cities/${this.state.selectedCity._id}`
+                : "/guest");
+              console.log(dest);
+              return <Redirect to={dest} />;
+            }} />
+          </Switch>
         </div>
-    </BrowserRouter>
+      </BrowserRouter>
     );
   }
 }
