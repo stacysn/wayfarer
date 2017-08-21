@@ -8,8 +8,7 @@ class ProfileContainer extends Component {
       <div>
         <h1>Welcome to Your Profile Page</h1>
         <h2>{this.props.user.name}</h2>
-        <img src={this.props.user.image}/>
-
+        <img src={this.props.user.image}/> 
       </div>
     )
   }
