@@ -82,6 +82,16 @@ class App extends Component {
       }, null);
     }
 
+
+    destroyPost(cityId, postId){
+
+      $.ajax({
+        method: 'DELETE',
+        url: `${this.props.apiUrl}/cities/${cityId}/posts/${postId}`,
+        success: this.updateCities.bind(this)
+      })
+    }
+
   render() {
     return (
       <BrowserRouter>
@@ -100,6 +110,7 @@ class App extends Component {
                 getPost={this.getPost.bind(this)}
                 selectedCity={this.getCity(props.match.params.cityId)}
                 addNewPost={this.addNewPost.bind(this)}
+                destroyPost={this.destroyPost.bind(this)}
               />)}
             }/>
             <Route exact path="/" render={props => {

@@ -22,7 +22,7 @@ class CitiesContainer extends Component {
               const cityId = props.match.params.cityId,
                 postId = props.match.params.postId;
               return (
-                <PostShow city={this.props.getCity(cityId)} post={this.props.getPost(cityId, postId)} />
+                <PostShow city={this.props.getCity(cityId)} post={this.props.getPost(cityId, postId)} destroyPost={this.props.destroyPost}/>
               )
             }} />
           </Switch>
