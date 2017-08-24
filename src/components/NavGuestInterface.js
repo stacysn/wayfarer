@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import $ from 'jquery-ajax';
-import App from '../App';
-
 
 class NavGuestInterface extends Component {
 
@@ -15,15 +13,9 @@ class NavGuestInterface extends Component {
       data: {
         username: username,
         password: password
-      }
+      },
+      success: () => ()
     })
-    .then(res => {
-      console.log('res is ', res);
-      App.setState({isAuthenticated: true, id:res._id});
-    }, err => {
-      console.log('oops!');
-      console.log(err);
-    });
   }
 
   render () {
