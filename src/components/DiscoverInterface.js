@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {ReactBootstrapCarousel} from 'react-bootstrap-carousel';
+import {React_Bootstrap_Carousel as ReactBootstrapCarousel} from 'react-bootstrap-carousel';
 
 
 class DiscoverInterface extends Component {
