@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-import {React_Bootstrap_Carousel} from 'react-bootstrap-carousel';
+import {React_Bootstrap_Carousel as ReactBootstrapCarousel} from 'react-bootstrap-carousel';
 
 class SlideShowInterface extends Component {
   render() {
     return(
     <div className='SlideShow'>
       <div style={{height:500,margin:20}}>
-        <React_Bootstrap_Carousel
+        <ReactBootstrapCarousel
           animation={true}
           onSelect={this.onSelect}
           className="carousel-fade"
@@ -31,7 +31,7 @@ class SlideShowInterface extends Component {
               <img src="/images/LondonDay.jpg" alt="LondonDay" width="100%"/>
             </div>
           </div>
-        </React_Bootstrap_Carousel>
+        </ReactBootstrapCarousel>
       </div>
     </div>
     )
