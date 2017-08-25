@@ -1,30 +1,49 @@
 import React, {Component} from 'react';
 import logo from '../logo.svg';
-import NavGuestInterface from './NavGuestInterface';
-import NavUserInterface from './NavUserInterface';
+import LoginModal from './LoginModal';
 import {Link} from 'react-router-dom'
 
 class NavContainer extends Component {
   constructor (props) {
     super(props);
-    // this.state = {}; //?
+    this.state = {
+      modalIsOpen: false
+    }; //?
   }
   render () {
-    const currentInterface = this.props.isLoggedIn ? <NavUserInterface /> : <NavGuestInterface />;
+    let currentInterface;
+    if (this.props.isLoggedIn) {
+      currentInterface = (
+        <ul className="nav navbar-nav navbar-right">
+          <li><Link to={"/profile"}>Profile</Link></li>
+          <li><a>Get Out</a></li>
+        </ul>
+      )
+    } else {
+      currentInterface = (
+        <ul className="nav navbar-nav navbar-right">
+          <li><a href="#" onClick={()=>this.setState({modalIsOpen:true})}>Log In</a></li>
+          <li><a>Sign Up</a></li>
+        </ul>
+      )
+    }
     return (
-      <nav className="navbar navbar-default">
-        <div className="container-fluid">
-          <div className="navbar-header">
-            {
-              //<img src={logo} alt="Wayfarer" />
-            }
-            <Link to={"/"} className="navbar-brand">Wayfarer</Link>
+      <div>
+        <nav className="navbar navbar-default">
+          <div className="container-fluid">
+            <div className="navbar-header">
+              <Link to={"/"} className="navbar-brand">Wayfarer</Link>
+            </div>
+            <div>
+              {currentInterface}
+            </div>
           </div>
-          <div>
-            {currentInterface}
-          </div>
-        </div>
-      </nav>
+        </nav>
+        <LoginModal
+          login={this.props.login}
+          closeModal={()=>this.setState({modalIsOpen:false})}
+          isOpen={this.state.modalIsOpen} />
+      </div>
     )
   }
 };

@@ -12,12 +12,12 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoggedIn: true, // later should be false
       user: {
         name: 'Chris',
         hometown: 'Aiea',
         image: '../images/chrisF.jpg'
       }, // dummy, replace later
+      isLoggedIn : false, // later should be false
       cities: [],
       showModal: false, //modal won't show until setState to true
       newEditTitle: "",
@@ -69,11 +69,10 @@ class App extends Component {
     }, null);
   }
 
-  toggleModal = () => {
+  toggleModal () {
     this.setState({
       showModal: !this.state.showModal
     })
-    console.log("modal flipped", this.state.showModal);
   }
 
   handleSubmitFromEdit = (event) => {
@@ -96,16 +95,13 @@ class App extends Component {
           cities: cities,
           selectedCity: selectedCity
         });
-        console.log('after ajax res, selectedCity is', selectedCity.city);
         this.state.history.push('/cities/' + selectedCity._id);
       }
     });
   }
 
-  handleSubmit(event, cityId, postId){
+  putPost(event, cityId, postId){
     event.preventDefault()
-    console.log('in handleSubmit at App,js');
-    console.log('title', this.state.newEditTitle);
     $.ajax({
       method: 'PUT',
       url: `${this.props.apiUrl}/cities/${cityId}/posts/${postId}`,
@@ -115,8 +111,6 @@ class App extends Component {
         this.updateCities();
       }
     })
-    console.log("TITLE", this.state.newEditTitle);
-    console.log("DESCRIPTION", this.state.newEditDescription);
     this.toggleModal();
   }
 
@@ -132,12 +126,35 @@ class App extends Component {
     let formId = $(event.target).closest('.validate').data('id-type')
     this.setState({[formId]: event.target.value});
   }
+  getPost(cityId, postId) {
+    return this.getCity(cityId).posts.reduce((prev, curr) => {
+      return prev || (curr._id === postId ? curr : null);
+    }, null);
+  }
+
+  login(username, password) {
+    $.ajax({
+      method: "POST",
+      url: `${this.props.apiUrl}/login`,
+      data: {
+        username: username,
+        password: password
+      },
+      success: res => {
+        console.log('Congrats! You\'re logged in!', res);
+        this.setState({isLoggedIn: true});
+      },
+      error: res => {
+        console.log('Sorry, you didn\'t make it!', res);
+      }
+    })
+  }
 
   render() {
     return (
       <BrowserRouter>
         <div className="App">
-          <NavContainer isLoggedIn={this.state.isLoggedIn} />
+          <NavContainer login={this.login.bind(this)} isLoggedIn={this.state.isLoggedIn} />
           <Switch>
             <Route path="/guest" render={(props) => <GuestContainer />} />
             <Route path="/cities" exact render={() => {
@@ -154,7 +171,7 @@ class App extends Component {
                 destroyPost={this.destroyPost.bind(this)}
                 toggleModal={this.toggleModal.bind(this)}
                 showModal={this.state.showModal}
-                handleSubmit={this.handleSubmit.bind(this)}
+                handleSubmit={this.putPost.bind(this)}
                 newEditDescription={this.state.newEditDescription}
                 newEditTitle={this.state.newEditTitle}
                 onChange={this.onChange.bind(this)}

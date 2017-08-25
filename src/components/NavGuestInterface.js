@@ -7,15 +7,6 @@ class NavGuestInterface extends Component {
     e.preventDefault();
     let username = this.state.username;
     let password = this.state.password;
-    $.ajax({
-      method: 'POST',
-      url: `http://localhost:3001/login`,
-      data: {
-        username: username,
-        password: password
-      },
-      success: () => ()
-    })
   }
 
   render () {
