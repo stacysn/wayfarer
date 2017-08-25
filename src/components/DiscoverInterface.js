@@ -69,27 +69,27 @@ class DiscoverInterface extends Component {
           onSelect={this.onSelect}
           className="carousel-fade"
         >
-          <div style={{height:200,width:"100%"}}>
-            <div>
-              <img src="/images/LondonDay.jpg" alt="LondonDay" width="100%"/>
-            </div>
+        <div style={{height:200,width:"100%"}}>
+          <div>
+            <img src="/images/LondonDay.jpg" alt="LondonDay" width="100%"/>
           </div>
-          <div style={{height:200,width:"100%"}}>
-            <div>
-              <img src="/images/SFGGB.jpg" alt="SFGGB" width="100%"/>
-            </div>
+        </div>
+        <div style={{height:200,width:"100%"}}>
+          <div>
+            <img src="/images/SFGGB.jpg" alt="SFGGB" width="100%"/>
           </div>
-          <div style={{height:200,width:"100%"}}>
-            <div>
-              <img src="/images/LondonNight.jpg" alt="LondonNight" width="100%"/>
-            </div>
+        </div>
+        <div style={{height:200,width:"100%"}}>
+          <div>
+            <img src="/images/LondonNight.jpg" alt="LondonNight" width="100%"/>
           </div>
-          <div style={{height:200,width:"100%"}}>
-            <div>
-              <img src="/images/SFSunrise.jpg" alt="SFSunrise" width="100%"/>
-            </div>
+        </div>
+        <div style={{height:200,width:"100%"}}>
+          <div>
+            <img src="/images/SFSunrise.jpg" alt="SFSunrise" width="100%"/>
           </div>
-        </ReactBootstrapCarousel>
+        </div>
+      </ReactBootstrapCarousel>
     </div>
 
       </div>
