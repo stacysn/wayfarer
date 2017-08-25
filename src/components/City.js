@@ -12,12 +12,15 @@ class City extends Component {
   render () {
     console.log('posts');
     console.log(this.props.city.posts);
-    const postComponents = this.props.city.posts.map(post => (
-      <Link to={`/cities/${this.props.city._id}/posts/${post._id}`} className="list-group-item" key={post._id}>
-        <h4 className="list-group-item-heading">{post.user.name}</h4>
-        <p className="list-group-item-text">{post.title}</p>
-      </Link>
-    ));
+    const postComponents = this.props.city.posts.map(post => {
+      if (!post || !post.user) return;
+      return (
+        <Link to={`/cities/${this.props.city._id}/posts/${post._id}`} className="list-group-item" key={post._id}>
+          <h4 className="list-group-item-heading">{post.user.name}</h4>
+          <p className="list-group-item-text">{post.title}</p>
+        </Link>
+      );
+      });
     return (
       <div>
         <div className="col-md-8">
