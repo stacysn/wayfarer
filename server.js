@@ -2,7 +2,7 @@
 var express = require('express'),
     mongoose = require('mongoose'),
     bodyParser = require('body-parser'),
-    db = require('./models');
+    db = require('./models'),
     cookieParser = require('cookie-parser'),
     session = require('express-session'),
     passport = require('passport'),
@@ -18,7 +18,8 @@ var port = process.env.API_PORT || 3001;
 var controllers = require('./controllers')
 
 //db config
-mongoose.connect('mongodb://localhost/wayfarer');
+const dbPath = process.env.MONGODB_URI || 'mongodb://localhost'
+mongoose.connect(dbPath + '/wayfarer');
 
 //config API to use bodyParser and look for JSON in req.body
 app.use(bodyParser.urlencoded({extended: true }));
