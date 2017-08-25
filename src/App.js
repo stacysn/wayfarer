@@ -130,22 +130,22 @@ class App extends Component {
     }, null);
   }
 
-  login(username, password) {
+  login(name, password) {
     $.ajax({
       method: "POST",
       url: `${this.props.apiUrl}/login`,
       data: {
-        username: username,
+        name: name,
         password: password
       },
-      success: res => {
-        console.log('Congrats! You\'re logged in!', res);
-        this.setState({isLoggedIn: true});
+      success: user => {
+        console.log('Congrats! You\'re logged in!', user);
+        this.setState({isLoggedIn: true, user: user});
         console.log(this.props);
         this.props.history.push(`/cities/${this.state.selectedCity._id}`);
       },
       error: res => {
-        console.log('Sorry, you didn\'t make it!', res);
+        alert('Sorry, authentication failed!');
       }
     })
   }

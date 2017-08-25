@@ -81,19 +81,20 @@ router.route('/users')
   .get(controllers.user.index)
   .post(controllers.user.create)
 
-router.route('/users/:id').get(controllers.user.show)
+router.route('/users/:id')
+  .get(controllers.user.show)
+  .put(controllers.user.update)
 
 const middlew = (req, res, next) => next();
 //const middlew = passport.authenticate('local');
 console.log(middlew);
 //passport routes
 router.route('/login')
-  .post(middlew, function (req, res) {
+  .post(function (req, res) {
   //.post(function (req, res) {
     console.log('User tried to login...');
     console.log(JSON.stringify(req.body));
-    //res.send(req.user);
-    res.send('successfully posted to /login');
+    controllers.user.login(req, res)
   });
 router.route('/logout').get(function (req, res) {
   console.log("BEFORE logout", req);

@@ -5,7 +5,7 @@ class LoginModal extends Component{
   constructor(props){
     super(props);
     this.state = {
-      username: '',
+      name: '',
       password: ''
     };
   }
@@ -20,16 +20,16 @@ class LoginModal extends Component{
         <form onSubmit={e => {
           e.preventDefault();
           console.log('form submitted');
-          this.props.login(this.state.username, this.state.password);
-          this.setState({username: '', password: ''});
+          this.props.login(this.state.name, this.state.password);
+          this.setState({name: '', password: ''});
           this.props.closeModal();
         }}>
           <Modal.Body>
             <div className="form-group">
               <label htmlFor="recipient-name" className="control-label">Username
-                <input name="username" type="text"
+                <input name="name" type="text"
                   className="form-control"
-                  onChange={(e)=>this.setState({username:e.target.value})}
+                  onChange={(e)=>this.setState({name:e.target.value})}
                 />
               </label>
             </div>
