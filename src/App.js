@@ -40,7 +40,7 @@ class App extends Component {
     let newPost = {
       title: $(formData.title).val(),
       text: $(formData.text).val(),
-      user: this.state.user.name
+      user: this.state.user
     }
     $.ajax({
       method: 'POST',
