@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {React_Bootstrap_Carousel} from 'react-bootstrap-carousel';
+import {ReactBootstrapCarousel} from 'react-bootstrap-carousel';
 
 
 class DiscoverInterface extends Component {
@@ -7,7 +7,7 @@ class DiscoverInterface extends Component {
     return (
         <div className="Discover">
           <div className="col-md-4">
-            <React_Bootstrap_Carousel
+            <ReactBootstrapCarousel
               animation={true}
               onSelect={this.onSelect}
               className="carousel-fade"
@@ -32,10 +32,10 @@ class DiscoverInterface extends Component {
                   <img src="/images/LondonDay.jpg" alt="LondonDay" width="100%"/>
                 </div>
               </div>
-            </React_Bootstrap_Carousel>
+            </ReactBootstrapCarousel>
         </div>
         <div className="col-md-4">
-          <React_Bootstrap_Carousel
+          <ReactBootstrapCarousel
             animation={true}
             onSelect={this.onSelect}
             className="carousel-fade"
@@ -61,10 +61,10 @@ class DiscoverInterface extends Component {
               </div>
             </div>
 
-          </React_Bootstrap_Carousel>
+          </ReactBootstrapCarousel>
       </div>
       <div className="col-md-4">
-        <React_Bootstrap_Carousel
+        <ReactBootstrapCarousel
           animation={true}
           onSelect={this.onSelect}
           className="carousel-fade"
@@ -89,7 +89,7 @@ class DiscoverInterface extends Component {
               <img src="/images/SFSunrise.jpg" alt="SFSunrise" width="100%"/>
             </div>
           </div>
-        </React_Bootstrap_Carousel>
+        </ReactBootstrapCarousel>
     </div>
 
       </div>
