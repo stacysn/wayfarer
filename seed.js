@@ -1,6 +1,6 @@
 var db = require("./models");
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/wayfarer');
+mongoose.connect('mongodb://localhost/wayfarer', {useMongoClient: true});
 
 const CityData = [
   {
@@ -103,9 +103,55 @@ const CityData = [
   }
 ];
 
-db.City.remove({}, function(err){
-  db.City.create(CityData, function(err, cities){
-    if (err) { return console.log('ERROR', err); }
-    console.log("all cities:", cities.length);
-  });
-});
+const users = [
+  {
+    name: "Chris",
+    password: "password",
+    hometown: "Aiea"
+  },
+  {
+    name: "Stacy",
+    password: "password",
+    hometown: "Yuba City"
+  },
+  {
+    name: "Garrick",
+    password: "password",
+    hometown: "Burlinghame"
+  },
+  {
+    name: "Cory",
+    password: "password"
+  }
+]
+
+let userDictionary = {};
+db.User.remove({}, function (err) {
+  if (err) throw err;
+  db.User.create(users, function (err, users) {
+    users.forEach(user=>userDictionary[user.name] = user._id);
+    //
+    if (err) console.log(err);
+    //
+    CityData.forEach(city=>{
+      city.posts.forEach(post=>{
+        post.user = userDictionary[post.user] // should by _id
+      });
+    })
+    //
+    console.log(`Created ${users.length} users.`);
+    // now create cities
+    db.City.remove({}, function(err){
+      if (err) {
+        console.log(err);
+        process.exit(1);
+      };
+      console.log('emptied out cities.');
+      db.City.create(CityData, function(err, cities){
+        if (err) { return console.log('ERROR', err); }
+        console.log("all cities:", cities.length);
+        process.exit(0);
+      });
+    });
+  })
+})

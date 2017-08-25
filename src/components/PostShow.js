@@ -14,7 +14,7 @@ class PostShow extends Component {
           <h1>{this.props.newEditTitle ? this.props.newEditTitle : post.title}<small>&nbsp;by {post.user}</small></h1>
           <p>{this.props.newEditDescription ? this.props.newEditDescription : post.description}</p>
           */}
-          <h1>{post.title}<small>&nbsp;by {post.user}</small></h1>
+          <h1>{post.title}<small>&nbsp;by {post.user.name}</small></h1>
           <p>{post.text}</p>
           <Link to={`/cities/${this.props.city._id}`} className="btn btn-primary">Return to {this.props.city.city}</Link>
           <button onClick={e=>this.props.toggleModal()} className="btn btn-default">Edit</button>
