@@ -1,15 +1,16 @@
 import React, {Component} from 'react';
-import { BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
+import {BrowserRouter, Route, Switch, Redirect, withRouter} from 'react-router-dom';
 import NavContainer from './components/NavContainer';
 import GuestContainer from './components/GuestContainer';
 import CitiesContainer from './components/CitiesContainer.js';
 import ProfileContainer from './components/ProfileContainer.js';
 import './App.css';
 import $ from 'jquery-ajax';
-import {createBrowserHistory} from 'history';
+//import {createBrowserHistory} from 'history';
 
 class App extends Component {
   constructor(props) {
+    console.log('contents of props in App.js', props);
     super(props);
     this.state = {
       user: {
@@ -28,8 +29,7 @@ class App extends Component {
         image: '',
         description: 'default city description',
         posts: []
-      },
-      history: createBrowserHistory()
+      }
     };
   }
 
@@ -95,7 +95,6 @@ class App extends Component {
           cities: cities,
           selectedCity: selectedCity
         });
-        this.state.history.push('/cities/' + selectedCity._id);
       }
     });
   }
@@ -143,6 +142,8 @@ class App extends Component {
       success: res => {
         console.log('Congrats! You\'re logged in!', res);
         this.setState({isLoggedIn: true});
+        console.log(this.props);
+        this.props.history.push(`/cities/${this.state.selectedCity._id}`);
       },
       error: res => {
         console.log('Sorry, you didn\'t make it!', res);
@@ -151,53 +152,51 @@ class App extends Component {
   }
 
   render() {
-    return (
-      <BrowserRouter>
-        <div className="App">
-          <NavContainer login={this.login.bind(this)} isLoggedIn={this.state.isLoggedIn} />
-          <Switch>
-            <Route path="/guest" render={(props) => <GuestContainer />} />
-            <Route path="/cities" exact render={() => {
-              console.log('hit /cities route, when selected is:', this.state.selectedCity._id);
-              return <Redirect to={`/cities/${this.state.selectedCity._id}`} />
-            }} />
-            <Route path="/cities/:cityId" render={(props) => {
-              return (<CitiesContainer
-                cities={this.state.cities}
-                getCity={this.getCity.bind(this)}
-                getPost={this.getPost.bind(this)}
-                selectedCity={this.getCity(props.match.params.cityId)}
-                addNewPost={this.addNewPost.bind(this)}
-                destroyPost={this.destroyPost.bind(this)}
-                toggleModal={this.toggleModal.bind(this)}
-                showModal={this.state.showModal}
-                handleSubmit={this.putPost.bind(this)}
-                newEditDescription={this.state.newEditDescription}
-                newEditTitle={this.state.newEditTitle}
-                onChange={this.onChange.bind(this)}
-              />)}
-            }/>
-            <Route exact path="/" render={props => {
-              const dest = (this.state.isLoggedIn
-                ? "/cities"
-                : "/guest");
-              return <Redirect to={dest} />;
-            }} />
+  return (
+    <div className="App">
+      <NavContainer login={this.login.bind(this)} isLoggedIn={this.state.isLoggedIn} />
+      <Switch>
+        <Route path="/guest" render={(props) => <GuestContainer />} />
+        <Route path="/cities" exact render={() => {
+          console.log('hit /cities route, when selected is:', this.state.selectedCity._id);
+          return <Redirect to={`/cities/${this.state.selectedCity._id}`} />
+        }} />
+        <Route path="/cities/:cityId" render={(props) => {
+          return (<CitiesContainer
+            cities={this.state.cities}
+            getCity={this.getCity.bind(this)}
+            getPost={this.getPost.bind(this)}
+            selectedCity={this.getCity(props.match.params.cityId)}
+            addNewPost={this.addNewPost.bind(this)}
+            destroyPost={this.destroyPost.bind(this)}
+            toggleModal={this.toggleModal.bind(this)}
+            showModal={this.state.showModal}
+            handleSubmit={this.putPost.bind(this)}
+            newEditDescription={this.state.newEditDescription}
+            newEditTitle={this.state.newEditTitle}
+            onChange={this.onChange.bind(this)}
+          />)}
+        }/>
+        <Route exact path="/" render={props => {
+          const dest = (this.state.isLoggedIn
+            ? "/cities"
+            : "/guest");
+          return <Redirect to={dest} />;
+        }} />
 
-            <Route path="/guest" render={(props) => <GuestContainer />} />
+        <Route path="/guest" render={(props) => <GuestContainer />} />
 
-            <Route path="/profile" render={(props) => {
-              return (<ProfileContainer
-                user={this.state.user}
-                />)
-              }}/>
+        <Route path="/profile" render={(props) => {
+          return (<ProfileContainer
+            user={this.state.user}
+            />)
+          }}/>
 
-          </Switch>
+        </Switch>
 
-        </div>
-      </BrowserRouter>
+      </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);
