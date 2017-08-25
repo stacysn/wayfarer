@@ -3,6 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
+import {BrowserRouter, Route} from 'react-router-dom'
 
-ReactDOM.render(<App apiUrl="http://localhost:3001/api" />, document.getElementById('root'));
+ReactDOM.render(
+  <BrowserRouter>
+    <App apiUrl="http://localhost:3001/api" />
+  </BrowserRouter>, document.getElementById('root'));
 registerServiceWorker();

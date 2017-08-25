@@ -8,7 +8,6 @@ var express = require('express'),
     passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy;
 
-
 //create instances
 var app = express(),
     router = express.Router();
@@ -24,6 +23,20 @@ mongoose.connect('mongodb://localhost/wayfarer');
 //config API to use bodyParser and look for JSON in req.body
 app.use(bodyParser.urlencoded({extended: true }));
 app.use(bodyParser.json());
+
+app.use(cookieParser());
+app.use(session({
+  secret: '12345', // super secure
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+//passport config
+passport.use(new LocalStrategy(db.User.authenticate()));
+passport.serializeUser(db.User.serializeUser());
+passport.deserializeUser(db.User.deserializeUser());
 
 //Prevent CORS errors
 app.use(function(req, res, next) {
@@ -64,11 +77,25 @@ router.route('/cities/:cityId/posts/:postId')
   .delete(controllers.post.destroy)
   .put(controllers.post.updatePost)
 
+router.route('/users')
+  .get(controllers.user.index)
+  .post(controllers.user.create)
+
+router.route('/users/:id')
+  .get(controllers.user.show)
+  .put(controllers.user.update)
+
+const middlew = (req, res, next) => next();
+//const middlew = passport.authenticate('local');
+console.log(middlew);
 //passport routes
-router.route('/login').post(passport.authenticate('local'), function (req, res) {
-  console.log(JSON.stringify(req.user));
-  res.send(req.user);
-});
+router.route('/login')
+  .post(function (req, res) {
+  //.post(function (req, res) {
+    console.log('User tried to login...');
+    console.log(JSON.stringify(req.body));
+    controllers.user.login(req, res)
+  });
 router.route('/logout').get(function (req, res) {
   console.log("BEFORE logout", req);
   req.logout();
