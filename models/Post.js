@@ -1,8 +1,9 @@
-let mongoose = require ("mongoose");
+let mongoose = require("mongoose");
 let Schema = mongoose.Schema;
+let User = require('./User');
 
 let PostSchema = new Schema({
-  user: String,
+  user: {type: Schema.Types.ObjectId, ref: 'User'},
   title: String,
   text: String,
   date: Date
