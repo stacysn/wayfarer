@@ -10,7 +10,6 @@ import $ from 'jquery-ajax';
 
 class App extends Component {
   constructor(props) {
-    console.log('contents of props in App.js', props);
     super(props);
     this.state = {
       user: {
@@ -150,11 +149,21 @@ class App extends Component {
       }
     })
   }
+  logout () {
+    console.log('logging out now...');
+    this.setState({user: null, isLoggedIn: false});
+    this.props.history.push('/guest');
+  }
 
   render() {
   return (
     <div className="App">
-      <NavContainer login={this.login.bind(this)} isLoggedIn={this.state.isLoggedIn} />
+      <NavContainer 
+        login={this.login.bind(this)}
+        isLoggedIn={this.state.isLoggedIn}
+        logout={this.logout.bind(this)}
+        user={this.state.user}
+      />
       <Switch>
         <Route path="/guest" render={(props) => <GuestContainer />} />
         <Route path="/cities" exact render={() => {

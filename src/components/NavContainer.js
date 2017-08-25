@@ -15,8 +15,8 @@ class NavContainer extends Component {
     if (this.props.isLoggedIn) {
       currentInterface = (
         <ul className="nav navbar-nav navbar-right">
-          <li><Link to={"/profile"}>Profile</Link></li>
-          <li><a>Get Out</a></li>
+          <li><Link to={"/profile"}>{this.props.user.name}</Link></li>
+          <li><a href="#" onClick={this.props.logout}>Get Out</a></li>
         </ul>
       )
     } else {

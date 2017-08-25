@@ -10,7 +10,6 @@ class City extends Component {
     };
   }
   render () {
-    console.log(this.props.city);
     const postComponents = this.props.city.posts.map(post => (
       <Link to={`/cities/${this.props.city._id}/posts/${post._id}`} className="list-group-item" key={post._id}>
         <h4 className="list-group-item-heading">{post.user}</h4>
